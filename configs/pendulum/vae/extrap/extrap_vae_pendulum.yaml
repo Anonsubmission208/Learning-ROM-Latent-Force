@@ -1,0 +1,17 @@
+task: extrap 
+train_data_path: '../../data/ODEs/pendulum/nonlinear.pkl'
+batch_size: 32
+num_workers: 1
+extrap_val_split: 0.8
+extrap_test_split: 0.9      
+
+embed_dim: 128
+latent_dim: 1
+
+ckpt_root: "scripts/pendulum_training/model_checkpoints"
+max_epochs: 2500
+val_check: 250
+log_every_n_steps: 250
+make_gifs: true
+
+seed: 0

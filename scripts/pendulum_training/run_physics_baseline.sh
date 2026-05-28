@@ -1,0 +1,55 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+TRAIN_SCRIPT="physics.py"
+
+CONFIG_DIR="../../configs/pendulum/physics/baseline"
+
+SEEDS=(1 3 5 7)
+
+declare -a SUCCESS_LIST=()
+declare -a FAIL_LIST=()
+
+for CONFIG_PATH in "$CONFIG_DIR"/*.yaml; do
+    CONFIG_NAME=$(basename "$CONFIG_PATH" .yaml)
+    echo "=== Running config: $CONFIG_NAME ==="
+
+    for SEED in "${SEEDS[@]}"; do
+        echo "  → Seed $SEED"
+
+        if python "$TRAIN_SCRIPT" --config "$CONFIG_PATH" --seed "$SEED"; then
+            SUCCESS_LIST+=("$CONFIG_NAME:seed=$SEED")
+        else
+            echo "    Seed $SEED failed — skipping"
+            FAIL_LIST+=("$CONFIG_NAME:seed=$SEED")
+            continue
+        fi
+    done
+done
+python3 physics.py --config "../../configs/pendulum/physics/baseline/recon_physics_pendulum.yaml" --seed 1
+echo
+echo "====================== SUMMARY ======================"
+echo
+
+echo "Successful runs:"
+if [ "${#SUCCESS_LIST[@]}" -eq 0 ]; then
+    echo "  (none)"
+else
+    for ITEM in "${SUCCESS_LIST[@]}"; do
+        echo "  $ITEM"
+    done
+fi
+
+echo
+echo "Failed runs:"
+if [ "${#FAIL_LIST[@]}" -eq 0 ]; then
+    echo "  (none)"
+else
+    for ITEM in "${FAIL_LIST[@]}"; do
+        echo "  $ITEM"
+    done
+fi
+
+echo
+echo "======================================================"
+

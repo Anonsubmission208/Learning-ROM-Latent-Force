@@ -1,0 +1,21 @@
+task: recon                
+train_data_path: '../../data/ODEs/pendulum/nonlinear.pkl'
+batch_size: 32
+num_workers: 1
+val_fraction: 0.10         
+test_fraction: 0.10        
+
+embed_dim: 128
+latent_dim: 1
+trainable_ls: false
+length_scale: 1.0
+amp: false
+scale: false
+
+ckpt_root: "scripts/pendulum_training/model_checkpoints"
+max_epochs: 4000
+val_check: 1000
+log_every_n_steps: 250
+make_gifs: true
+
+seed: 0

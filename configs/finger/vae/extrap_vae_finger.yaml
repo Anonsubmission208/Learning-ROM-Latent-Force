@@ -1,0 +1,17 @@
+task: extrap 
+train_data_path: 'data/ODEs/finger/real_finger/pickle_files/shortened_real_finger_pos_time_1.5_ls_0.6_mean_22_var_4_scale_100.pkl'
+batch_size: 32
+num_workers: 1
+extrap_val_split: 0.8
+extrap_test_split: 0.9      
+
+embed_dim: 128
+latent_dim: 1
+
+ckpt_root: "scripts/finger_training/model_checkpoints"
+max_epochs: 6000
+val_check: 250
+log_every_n_steps: 250
+make_gifs: true
+
+seed: 0
