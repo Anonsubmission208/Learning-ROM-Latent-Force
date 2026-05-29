@@ -49,7 +49,7 @@ source .venv/bin/activate
 ```
 
 ```bash
-pip install torch numpy scipy matplotlib scikit-learn opencv-python jupyter
+pip install torch numpy scipy matplotlib scikit-learn opencv-python 
 ```
 
 Add the source directory to your Python path:
