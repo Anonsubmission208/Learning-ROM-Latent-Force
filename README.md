@@ -52,12 +52,6 @@ source .venv/bin/activate
 pip install torch numpy scipy matplotlib scikit-learn opencv-python 
 ```
 
-Add the source directory to your Python path:
-
-```bash
-export PYTHONPATH=$PWD/src:$PYTHONPATH
-```
-
 ## Usage
 
 ### Generate Pendulum Data
